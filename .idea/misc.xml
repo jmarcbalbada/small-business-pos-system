@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/John Marc/Desktop/Second Year/SECOND SEMESTER/C2/CSIT284 - Platform-based Development (Mobile)/Final Project/small-business-pos-system/app/src/main/res/layout/activity_main.xml" value="0.2210144927536232" />
-        <entry key="..\:/Users/John Marc/Desktop/Second Year/SECOND SEMESTER/C2/CSIT284 - Platform-based Development (Mobile)/Final Project/small-business-pos-system/app/src/main/res/layout/activity_welcome_screen.xml" value="0.23641304347826086" />
+        <entry key="..\:/Users/John Marc/Desktop/Second Year/SECOND SEMESTER/C2/CSIT284 - Platform-based Development (Mobile)/Final Project/small-business-pos-system/app/src/main/res/layout/activity_home_screen.xml" value="0.264" />
+        <entry key="..\:/Users/John Marc/Desktop/Second Year/SECOND SEMESTER/C2/CSIT284 - Platform-based Development (Mobile)/Final Project/small-business-pos-system/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/John Marc/Desktop/Second Year/SECOND SEMESTER/C2/CSIT284 - Platform-based Development (Mobile)/Final Project/small-business-pos-system/app/src/main/res/layout/activity_welcome_screen.xml" value="0.264" />
         <entry key="..\:/Users/John Marc/Desktop/Second Year/SECOND SEMESTER/C2/CSIT284 - Platform-based Development (Mobile)/Final Project/small-business-pos-system/app/src/main/res/layout/content_main.xml" value="0.2210144927536232" />
       </map>
     </option>
