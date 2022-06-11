@@ -8,8 +8,21 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
-    <string name="welcome_title">POS System</string>
-    <string name="welcome_title2">for Small Businesses</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="view_inventory">View Inventory</string>
+    <string name="welcome_title">POS System</string>
+    <string name="welcome_title2">for Small Businesses</string>
+    <string name="view_transactionHistory">View Transaction History</string>
+    <string name="view_addTransaction">Add Transaction</string>
+    <string name="title_activity_add_inventory">AddInventory</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
 </resources>
