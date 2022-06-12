@@ -10,14 +10,14 @@
         android:id="@+id/add_inventory_addInventoryLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Inventory"
+        android:text="Add Item"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.342"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.111" />
+        app:layout_constraintVertical_bias="0.117" />
 
     <TextView
         android:id="@+id/textView3"
@@ -25,7 +25,7 @@
         android:layout_height="33dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="72dp"
-        android:text="Name of Item:"
+        android:text="Item Name:"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_inventory_addInventoryLabel" />
@@ -55,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/add_inventory_addInventoryLabel" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/fieldItemName"
         android:layout_width="179dp"
         android:layout_height="47dp"
         android:layout_marginTop="64dp"
@@ -67,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/add_inventory_addInventoryLabel" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/fieldQuantity"
         android:layout_width="225dp"
         android:layout_height="41dp"
         android:layout_marginTop="144dp"
@@ -80,7 +80,7 @@
         app:layout_constraintTop_toBottomOf="@+id/add_inventory_addInventoryLabel" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/fieldPrice"
         android:layout_width="225dp"
         android:layout_height="41dp"
         android:layout_marginTop="212dp"
@@ -93,28 +93,29 @@
         app:layout_constraintTop_toBottomOf="@+id/add_inventory_addInventoryLabel" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Item"
+        android:text="Confirm"
+        android:onClick="addItem"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintHorizontal_bias="0.862"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.632" />
+        app:layout_constraintVertical_bias="0.635" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="backButtonInventory"
-        android:text="Back"
+        android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.824" />
+        app:layout_constraintVertical_bias="0.635" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

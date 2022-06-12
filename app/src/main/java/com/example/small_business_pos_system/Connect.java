@@ -48,13 +48,13 @@ public class Connect extends SQLiteOpenHelper {
 //        onCreate(db);
     }
 
-    public long addItem()
+    public long addItem(Item item)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_NAME,"Peanut");
-        cv.put(COLUMN_PRICE,50);
+        cv.put(COLUMN_NAME,item.getName());
+        cv.put(COLUMN_PRICE,item.getPrice());
 
         long insert = db.insert(ITEM_TABLE, null, cv);
         return insert;
@@ -74,14 +74,14 @@ public class Connect extends SQLiteOpenHelper {
         return false;
     }
 
-    public boolean addInventory()
+    public boolean addInventory(Inventory inventory)
     {
-        long rowId = addItem();
+        long rowId = addItem(inventory.getItem());
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_IT_ID,rowId);
-        cv.put(COLUMN_QUANTITY,99);
+        cv.put(COLUMN_IT_ID,Integer.parseInt(rowId+""));
+        cv.put(COLUMN_QUANTITY,inventory.getQuantity());
 
         long insert = db.insert(INVENTORY_TABLE, null, cv);
         if(insert == -1)
@@ -92,27 +92,27 @@ public class Connect extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean addTransaction()
-    {
-        long rowId = addItem();
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        int it_id = (int) rowId;
-        Item item = getItem(it_id);
-
-        cv.put(COLUMN_IT_ID,it_id);
-        cv.put(COLUMN_QUANTITY,45);
-        cv.put(COLUMN_TOTAL_PRICE,500.00);
-        cv.put(COLUMN_DATEOFPURCHASE,new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
-//        cv.put(COLUMN_DATEOFPURCHASE,"0000/00/00");
-        long insert = db.insert(TRANSACTION_TABLE, null, cv);
-        if(insert == -1)
-        {
-            return false;
-        }
-
-        return true;
-    }
+//    public boolean addTransaction()
+//    {
+//        long rowId = addItem();
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        ContentValues cv = new ContentValues();
+//        int it_id = (int) rowId;
+//        Item item = getItem(it_id);
+//
+//        cv.put(COLUMN_IT_ID,it_id);
+//        cv.put(COLUMN_QUANTITY,45);
+//        cv.put(COLUMN_TOTAL_PRICE,500.00);
+//        cv.put(COLUMN_DATEOFPURCHASE,new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
+////        cv.put(COLUMN_DATEOFPURCHASE,"0000/00/00");
+//        long insert = db.insert(TRANSACTION_TABLE, null, cv);
+//        if(insert == -1)
+//        {
+//            return false;
+//        }
+//
+//        return true;
+//    }
 
     public List<Inventory> getAllInventory()
     {
