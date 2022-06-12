@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ public class AddTransaction extends AppCompatActivity {
                 builder.setMessage("You selected " + model.getName() +" @ "+model.getPrice()+" each\nIn stock: " + model.getQuantity());
 
                 // Set up the input
-                final EditText input = new EditText(AddTransaction.this);
+                EditText input = new EditText(AddTransaction.this);
                 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 builder.setView(input);
@@ -56,6 +57,7 @@ public class AddTransaction extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         m_Quantity = input.getText().toString();
+                        Log.e("M_QUANTITY",m_Quantity);
                         if(Integer.parseInt(m_Quantity) > model.getQuantity()) {
                             input.setError("Insufficient stock!");
                             proceed = false;
@@ -63,11 +65,15 @@ public class AddTransaction extends AppCompatActivity {
                         try {
                             if(proceed) {
                                 Item item = conn.getItemByName(model.getName());
+                                Log.e("ITEM",item.toString());
                                 Transaction transaction = new Transaction(item, Integer.parseInt(m_Quantity), model.getPrice() * Float.parseFloat(m_Quantity));
                                 boolean successTransaction = conn.addTransaction(transaction);
                                 if (successTransaction) {
                                     Inventory inventory = new Inventory(item,model.getQuantity()-Integer.parseInt(m_Quantity));
                                     conn.editInventoryItem(inventory);
+                                    Toast.makeText(AddTransaction.this, "Purchase complete!", Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(AddTransaction.this,MainActivity.class);
+                                    startActivity(i);
                                 }
                             }
                         } catch (Exception e) {

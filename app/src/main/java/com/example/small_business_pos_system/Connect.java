@@ -113,8 +113,8 @@ public class Connect extends SQLiteOpenHelper {
 
     public void editInventoryItem(Inventory inventory) {
 
-        String sql = "UPDATE " + INVENTORY_TABLE + "SET QUANTITY = " + inventory.getQuantity() + " WHERE it_id = " + inventory.getItem().getIt_id();
-        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "UPDATE " + INVENTORY_TABLE + " SET QUANTITY = " + inventory.getQuantity() + " WHERE it_id = " + inventory.getItem().getIt_id();
+        SQLiteDatabase db = this.getWritableDatabase();
 //        ContentValues cv = new ContentValues();
 //        cv.put(COLUMN_QUANTITY, inventory.getQuantity());
 
