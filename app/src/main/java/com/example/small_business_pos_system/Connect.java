@@ -93,27 +93,47 @@ public class Connect extends SQLiteOpenHelper {
         return true;
     }
 
-//    public boolean addTransaction()
-//    {
-//        long rowId = addItem();
-//        SQLiteDatabase db = this.getWritableDatabase();
+    public boolean addTransaction(Transaction transaction) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        int it_id = transaction.getItem().getIt_id();
+
+        cv.put(COLUMN_IT_ID,it_id);
+        cv.put(COLUMN_QUANTITY,transaction.getQuantity());
+        cv.put(COLUMN_TOTAL_PRICE,transaction.getTotalPrice());
+        cv.put(COLUMN_DATEOFPURCHASE,new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
+
+        long insert = db.insert(TRANSACTION_TABLE, null, cv);
+        if(insert == -1)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void editInventoryItem(Inventory inventory) {
+
+        String sql = "UPDATE " + INVENTORY_TABLE + " SET QUANTITY = " + inventory.getQuantity() + " WHERE it_id = " + inventory.getItem().getIt_id();
+        SQLiteDatabase db = this.getWritableDatabase();
 //        ContentValues cv = new ContentValues();
-//        int it_id = (int) rowId;
-//        Item item = getItem(it_id);
-//
-//        cv.put(COLUMN_IT_ID,it_id);
-//        cv.put(COLUMN_QUANTITY,45);
-//        cv.put(COLUMN_TOTAL_PRICE,500.00);
-//        cv.put(COLUMN_DATEOFPURCHASE,new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
-////        cv.put(COLUMN_DATEOFPURCHASE,"0000/00/00");
-//        long insert = db.insert(TRANSACTION_TABLE, null, cv);
-//        if(insert == -1)
+//        cv.put(COLUMN_QUANTITY, inventory.getQuantity());
+
+        db.execSQL(sql);
+
+
+//        db.update(INVENTORY_TABLE, cv,"WHERE it_id = " + inventory.getItem().getIt_id(), );
+//        long  db.rawQuery(sql,null);
+//        db.R
+//        if(cursor.moveToFirst())
 //        {
-//            return false;
-//        }
+//            cursor.close();
+//            db.close();
 //
-//        return true;
-//    }
+//            return true;
+//        }
+//        return false;
+    }
 
     public boolean editPrice(int it_id ,float price)
     {
@@ -252,6 +272,19 @@ public class Connect extends SQLiteOpenHelper {
     {
         Item result = null;
         String sql = "SELECT * FROM " + ITEM_TABLE + " WHERE it_id = " + it_id;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql,null);
+        if(cursor.moveToFirst())
+        {
+            result = new Item(cursor.getInt(0),cursor.getString(1),cursor.getFloat(2));
+        }
+        return result;
+    }
+
+    public Item getItemByName(String name)
+    {
+        Item result = null;
+        String sql = "SELECT * FROM " + ITEM_TABLE + " WHERE NAME = '" + name + "'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql,null);
         if(cursor.moveToFirst())
