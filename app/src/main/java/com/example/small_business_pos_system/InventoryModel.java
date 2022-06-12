@@ -37,10 +37,8 @@ public class InventoryModel {
 
     @Override
     public String toString() {
-        return "InventoryModel{" +
-                "name='" + name + '\'' +
-                ", price=" + price +
-                ", quantity=" + quantity +
-                '}';
+        String str = "\nName: " + this.getName() + "\nPrice: " +  String.format("%.2f", this.getPrice())
+                + "\nQuantity: " + this.getQuantity() + "\n";
+        return str;
     }
 }

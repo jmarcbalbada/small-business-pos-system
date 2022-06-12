@@ -135,6 +135,47 @@ public class Connect extends SQLiteOpenHelper {
         return result;
     }
 
+    public List<Integer> getAllInventoryQuantity()
+    {
+        List<Integer> result = new ArrayList<>();
+        String sql = "SELECT QUANTITY FROM " + INVENTORY_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(sql,null);
+        if(cursor.moveToFirst())
+        {
+            do {
+                Integer i = new Integer(cursor.getInt(0));
+                result.add(i);
+            }while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return result;
+    }
+
+    public List<String> getAllInventoryName()
+    {
+        List<String> result = new ArrayList<>();
+        String sql = "SELECT IT_ID FROM " + INVENTORY_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(sql,null);
+        if(cursor.moveToFirst())
+        {
+            do {
+                Item item = getItem(cursor.getInt(0));
+                String str = item.getName();
+                result.add(str);
+            }while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return result;
+    }
+
     public void dropItem()
     {
         SQLiteDatabase db = this.getWritableDatabase();

@@ -46,19 +46,23 @@ public class AddInventory extends AppCompatActivity {
             proceed = false;
         }
 
-        if (proceed) {
-            Item item = new Item(fieldItemName.getText().toString(), Float.parseFloat(String.valueOf(fieldPrice.getText())));
-            Inventory inventory = new Inventory(item,Integer.parseInt(String.valueOf(fieldQuantity.getText())));
+        try{
+            if (proceed) {
+                Item item = new Item(fieldItemName.getText().toString(), Float.parseFloat(String.valueOf(fieldPrice.getText())));
+                Inventory inventory = new Inventory(item,Integer.parseInt(String.valueOf(fieldQuantity.getText())));
 
-            boolean flag = conn.addInventory(inventory);
-            if(flag) {
-                Toast.makeText(this, "Item successfully added.", Toast.LENGTH_LONG).show();
-            }else {
-                Toast.makeText(this, "Item was not successfully added.", Toast.LENGTH_LONG).show();
+                boolean flag = conn.addInventory(inventory);
+                if(flag) {
+                    Toast.makeText(this, "Item added successfully!", Toast.LENGTH_LONG).show();
+                }
+
+                Intent i = new Intent(this,MainActivity.class);
+                startActivity(i);
             }
-
-            Intent i = new Intent(this,MainActivity.class);
-            startActivity(i);
+        }catch(Exception e)
+        {
+            Toast.makeText(this, "Please enter a valid input!", Toast.LENGTH_LONG).show();
         }
+
     }
 }
