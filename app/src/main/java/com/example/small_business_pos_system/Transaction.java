@@ -18,6 +18,13 @@ public class Transaction {
         this.dateOfPurchase = dateOfPurchase;
     }
 
+    public Transaction (Item item, int quantity, float totalPrice)
+    {
+        this.item = item;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+    }
+
     public Transaction (String name, float price, int ref_no, int quantity, float totalPrice, String dateOfPurchase)
     {
         item.setName(name);
