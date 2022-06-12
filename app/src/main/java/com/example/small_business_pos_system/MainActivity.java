@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
         lv_itemlist = findViewById(R.id.lv_items);
 //        conn.dropItem();
 //        conn.dropInventory();
-//        conn.addInventory();
+        conn.addInventory();
+        conn.addTransaction();
         transform();
 //        displayItem();
     }

@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Connect extends SQLiteOpenHelper {
@@ -21,8 +23,8 @@ public class Connect extends SQLiteOpenHelper {
     public static final String COLUMN_QUANTITY = "QUANTITY";
     public static final String COLUMN_IT_ID = "IT_ID";
     public static final String COLUMN_REF_NO = "REF_NO";
-    public static final String COLUMN_TOTALPRICE = "TOTALPRICE";
-    public static final String COLUMN_DATEOFPURCHASE = "DATEOFPURCHASE";
+    public static final String COLUMN_TOTAL_PRICE = "TOTAL_PRICE";
+    public static final String COLUMN_DATEOFPURCHASE = "DATE";
 
     public Connect(@Nullable Context context) {
         super(context, "small_business_pos_system.db", null, 1);
@@ -32,7 +34,7 @@ public class Connect extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createItemTableStatement = "CREATE TABLE ITEM (IT_ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, PRICE REAL)";
         String createInventoryTableStatement = "CREATE TABLE INVENTORY (IN_ID INTEGER PRIMARY KEY AUTOINCREMENT, IT_ID INTEGER, QUANTITY INTEGER, FOREIGN KEY(IT_ID) REFERENCES ITEM(IT_ID))";
-        String createTransactionTableStatement = "CREATE TABLE TRANSACTIONS (REF_NO INTEGER PRIMARY KEY AUTOINCREMENT, ITEM_NAME TEXT, QUANTITY INTEGER, TOTAL_PRICE REAL, FOREIGN KEY(ITEM_NAME) REFERENCES ITEM(NAME))";
+        String createTransactionTableStatement = "CREATE TABLE TRANSACTIONS (REF_NO INTEGER PRIMARY KEY AUTOINCREMENT, IT_ID INTEGER, QUANTITY INTEGER, TOTAL_PRICE REAL, DATE TEXT, FOREIGN KEY(IT_ID) REFERENCES ITEM(IT_ID))";
         db.execSQL(createItemTableStatement);
         db.execSQL(createInventoryTableStatement);
         db.execSQL(createTransactionTableStatement);
@@ -51,7 +53,7 @@ public class Connect extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_NAME,"Milk");
+        cv.put(COLUMN_NAME,"Peanut");
         cv.put(COLUMN_PRICE,50);
 
         long insert = db.insert(ITEM_TABLE, null, cv);
@@ -82,6 +84,28 @@ public class Connect extends SQLiteOpenHelper {
         cv.put(COLUMN_QUANTITY,99);
 
         long insert = db.insert(INVENTORY_TABLE, null, cv);
+        if(insert == -1)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean addTransaction()
+    {
+        long rowId = addItem();
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        int it_id = (int) rowId;
+        Item item = getItem(it_id);
+
+        cv.put(COLUMN_IT_ID,it_id);
+        cv.put(COLUMN_QUANTITY,45);
+        cv.put(COLUMN_TOTAL_PRICE,500.00);
+        cv.put(COLUMN_DATEOFPURCHASE,new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
+//        cv.put(COLUMN_DATEOFPURCHASE,"0000/00/00");
+        long insert = db.insert(TRANSACTION_TABLE, null, cv);
         if(insert == -1)
         {
             return false;
