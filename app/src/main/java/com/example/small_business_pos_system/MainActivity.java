@@ -1,15 +1,16 @@
 package com.example.small_business_pos_system;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.RequiresApi;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_gallery)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -59,9 +60,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
         conn = new Connect(MainActivity.this);
         lv_itemlist = findViewById(R.id.lv_items);
+//        lv_stock = findViewById(R.id.lv_items);;
+//        lv_quantity = findViewById(R.id.lv_quantity);
 //        conn.dropItem();
 //        conn.dropInventory();
-        transform();
+//        transform();
 //        displayItem();
     }
 
@@ -85,12 +88,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void buttonClicked(View v)
-    {
-//        boolean valid = conn.addInventory();
-//        Toast.makeText(this, "Success=" + valid, Toast.LENGTH_SHORT).show();
-//        displayItem();
-    }
 
     public void displayItem()
     {
@@ -99,20 +96,10 @@ public class MainActivity extends AppCompatActivity {
 //        lv_itemlist.setAdapter(itemArrayAdapter);
     }
 
-    public void transform()
-    {
-        List<Inventory> itemList = conn.getAllInventory();
-        List<InventoryModel> modelList = new ArrayList<>();
 
-        for(Inventory inventory: itemList)
-        {
-            InventoryModel model = new InventoryModel(inventory.getItem().getName(),inventory.getItem().getPrice(),inventory.getQuantity());
-            modelList.add(model);
-        }
 
-        itemArrayAdapter = new ArrayAdapter<InventoryModel>(MainActivity.this,android.R.layout.simple_list_item_1,modelList);
-        lv_itemlist.setAdapter(itemArrayAdapter);
-    }
+
+
 
 
 }

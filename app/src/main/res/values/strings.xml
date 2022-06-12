@@ -10,10 +10,10 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-    <string name="view_inventory">View Inventory</string>
+    <string name="view_inventory">Inventory</string>
     <string name="welcome_title">POS System</string>
     <string name="welcome_title2">for Small Businesses</string>
-    <string name="view_transactionHistory">View Transaction History</string>
+    <string name="view_transactionHistory">Transaction History</string>
     <string name="view_addTransaction">Add Transaction</string>
     <string name="title_activity_add_inventory">AddInventory</string>
     <!-- Strings used for fragments for navigation -->

@@ -55,7 +55,8 @@ public class Inventory {
     @Override
     public String toString()
     {
-        String str = this.item.getName() + "" +  this.quantity;
+        String str = "Name: " + this.item.getName() + "\n Price: " +  this.getItem().getPrice()
+                + "\n Quantity: " + this.getQuantity();
         return str;
     }
 }
