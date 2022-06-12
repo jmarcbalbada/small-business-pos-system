@@ -4,11 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/John Marc/Desktop/Second Year/SECOND SEMESTER/C2/CSIT284 - Platform-based Development (Mobile)/Final Project/SMALL-BUSINESS-POS-SYSTEM/app/src/main/res/drawable/divider.xml" value="0.2175" />
+        <entry key="..\:/Users/John Marc/Desktop/Second Year/SECOND SEMESTER/C2/CSIT284 - Platform-based Development (Mobile)/Final Project/SMALL-BUSINESS-POS-SYSTEM/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.1535" />
         <entry key="..\:/Users/John Marc/Desktop/Second Year/SECOND SEMESTER/C2/CSIT284 - Platform-based Development (Mobile)/Final Project/SMALL-BUSINESS-POS-SYSTEM/app/src/main/res/layout/activity_add_transaction.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/John Marc/Desktop/Second Year/SECOND SEMESTER/C2/CSIT284 - Platform-based Development (Mobile)/Final Project/SMALL-BUSINESS-POS-SYSTEM/app/src/main/res/layout/activity_edit_inventory.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/John Marc/Desktop/Second Year/SECOND SEMESTER/C2/CSIT284 - Platform-based Development (Mobile)/Final Project/SMALL-BUSINESS-POS-SYSTEM/app/src/main/res/layout/activity_home_screen.xml" value="0.2210144927536232" />
         <entry key="..\:/Users/John Marc/Desktop/Second Year/SECOND SEMESTER/C2/CSIT284 - Platform-based Development (Mobile)/Final Project/SMALL-BUSINESS-POS-SYSTEM/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/John Marc/Desktop/Second Year/SECOND SEMESTER/C2/CSIT284 - Platform-based Development (Mobile)/Final Project/SMALL-BUSINESS-POS-SYSTEM/app/src/main/res/layout/app_bar_main.xml" value="0.2210144927536232" />
         <entry key="..\:/Users/John Marc/Desktop/Second Year/SECOND SEMESTER/C2/CSIT284 - Platform-based Development (Mobile)/Final Project/SMALL-BUSINESS-POS-SYSTEM/app/src/main/res/layout/content_main.xml" value="0.2210144927536232" />
+        <entry key="..\:/Users/John Marc/Desktop/Second Year/SECOND SEMESTER/C2/CSIT284 - Platform-based Development (Mobile)/Final Project/SMALL-BUSINESS-POS-SYSTEM/app/src/main/res/layout/edit_dialog_layout.xml" value="0.4" />
         <entry key="..\:/Users/John Marc/Desktop/Second Year/SECOND SEMESTER/C2/CSIT284 - Platform-based Development (Mobile)/Final Project/SMALL-BUSINESS-POS-SYSTEM/app/src/main/res/layout/fragment_gallery.xml" value="0.2210144927536232" />
         <entry key="..\:/Users/John Marc/Desktop/Second Year/SECOND SEMESTER/C2/CSIT284 - Platform-based Development (Mobile)/Final Project/SMALL-BUSINESS-POS-SYSTEM/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/Users/John Marc/Desktop/Second Year/SECOND SEMESTER/C2/CSIT284 - Platform-based Development (Mobile)/Final Project/SMALL-BUSINESS-POS-SYSTEM/app/src/main/res/layout/fragment_slideshow.xml" value="0.2210144927536232" />

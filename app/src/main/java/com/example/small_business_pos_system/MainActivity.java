@@ -5,12 +5,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -30,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     public Connect conn;
     ArrayAdapter itemArrayAdapter;
     ListView lv_itemlist;
+    AppCompatButton yesButton, cancelButton;
+    AlertDialog.Builder builderDialog;
+    AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +68,16 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
         conn = new Connect(MainActivity.this);
         lv_itemlist = findViewById(R.id.lv_items);
+        yesButton = (AppCompatButton)findViewById(R.id.yesButton);
+        cancelButton = (AppCompatButton)findViewById(R.id.cancelButton);
+//        lv_itemlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+//                InventoryModel model = (InventoryModel) adapterView.getItemAtPosition(position);
+//                Toast.makeText(MainActivity.this, model.toString(), Toast.LENGTH_SHORT).show();
+//                showAlertDialog(R.layout.edit_dialog_layout,model.getName(),model.getPrice(),model.getQuantity());
+//            }
+//        });
 //        lv_stock = findViewById(R.id.lv_items);;
 //        lv_quantity = findViewById(R.id.lv_quantity);
 //        conn.dropItem();
@@ -95,6 +113,26 @@ public class MainActivity extends AppCompatActivity {
 //        itemArrayAdapter = new ArrayAdapter<Inventory>(MainActivity.this,android.R.layout.simple_list_item_1,itemList);
 //        lv_itemlist.setAdapter(itemArrayAdapter);
     }
+
+
+//    public void cancelButtonClicked(View v)
+//    {
+//        alertDialog.cancel();
+//    }
+//
+//    public void okButtonClicked(View v)
+//    {
+//        alertDialog.dismiss();
+//    }
+//
+//    private void showAlertDialog(int myLayout,String name, float price, int quantity)
+//    {
+//        builderDialog = new AlertDialog.Builder(this);
+//        View layoutView = getLayoutInflater().inflate(myLayout,null);
+//        builderDialog.setView(layoutView);
+//        alertDialog = builderDialog.create();
+//        alertDialog.show();
+//    }
 
 
 

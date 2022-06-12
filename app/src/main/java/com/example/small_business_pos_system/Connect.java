@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -113,6 +114,70 @@ public class Connect extends SQLiteOpenHelper {
 //
 //        return true;
 //    }
+
+    public boolean editPrice(int it_id ,float price)
+    {
+        boolean valid = false;
+        if(price < 0)
+        {
+            String sql = "UPDATE " + ITEM_TABLE + " SET PRICE = " + price + " WHERE IT_ID = " + it_id;
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            Cursor cursor = db.rawQuery(sql,null);
+            if(cursor.moveToFirst())
+            {
+                valid = true;
+            }
+            cursor.close();
+            db.close();
+        }
+
+        return valid;
+    }
+
+    public boolean editItemName(int it_id ,String name)
+    {
+        boolean valid = false;
+
+        try{
+            String sql = "UPDATE " + ITEM_TABLE + " SET NAME = " + name + " WHERE IT_ID = " + it_id;
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery(sql,null);
+            if(cursor.moveToFirst())
+            {
+                valid = true;
+            }
+            cursor.close();
+            db.close();
+        }catch(Exception e)
+        {
+            Log.e("EDIT_ITEM_NAME", "ERROR SETTING NAME");
+        }
+
+        return valid;
+    }
+
+    public boolean editQuantity(int quantity, int in_id)
+    {
+        boolean valid = false;
+
+        try{
+            String sql = "UPDATE " + INVENTORY_TABLE + " SET QUANTITY = " + quantity + " WHERE IN_ID = " + in_id;
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery(sql,null);
+            if(cursor.moveToFirst())
+            {
+                valid = true;
+            }
+            cursor.close();
+            db.close();
+        }catch(Exception e)
+        {
+            Log.e("EDIT_QUANTITY", "ERROR SETTING QUANTITY");
+        }
+
+        return valid;
+    }
 
     public List<Inventory> getAllInventory()
     {
