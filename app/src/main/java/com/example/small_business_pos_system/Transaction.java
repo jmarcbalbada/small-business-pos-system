@@ -1,7 +1,7 @@
 package com.example.small_business_pos_system;
 
 public class Transaction {
-    private Item items;
+    private Item item;
     private int ref_no;
     private int quantity;
     private float totalPrice;
@@ -9,9 +9,9 @@ public class Transaction {
 
     public Transaction(){}
 
-    public Transaction (Item items, int ref_no, int quantity, float totalPrice, String dateOfPurchase)
+    public Transaction (Item item, int ref_no, int quantity, float totalPrice, String dateOfPurchase)
     {
-        this.items = items;
+        this.item = item;
         this.ref_no = ref_no;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
@@ -20,8 +20,8 @@ public class Transaction {
 
     public Transaction (String name, float price, int ref_no, int quantity, float totalPrice, String dateOfPurchase)
     {
-        items.setName(name);
-        items.setPrice(price);
+        item.setName(name);
+        item.setPrice(price);
         this.ref_no = ref_no;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
@@ -29,9 +29,9 @@ public class Transaction {
     }
 
     //getters
-    public Item getItems()
+    public Item getItem()
     {
-        return this.items;
+        return this.item;
     }
 
     public int getRef_no()
@@ -55,9 +55,9 @@ public class Transaction {
     }
 
     //setters
-    public void setItems(Item items)
+    public void setItem(Item item)
     {
-        this.items = items;
+        this.item = item;
     }
 
     public void setQuantity(int quantity)
