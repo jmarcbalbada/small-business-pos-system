@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void snackBarClicked(View v)
     {
-        Intent i = new Intent(this,AddInventory.class);
+        Intent i = new Intent(this,AddTransaction.class);
         startActivity(i);
     }
 

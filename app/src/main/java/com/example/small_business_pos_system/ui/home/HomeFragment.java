@@ -1,10 +1,12 @@
 package com.example.small_business_pos_system.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -12,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.small_business_pos_system.AddInventory;
 import com.example.small_business_pos_system.Connect;
 import com.example.small_business_pos_system.Inventory;
 import com.example.small_business_pos_system.InventoryModel;
@@ -28,6 +31,7 @@ public class HomeFragment extends Fragment {
     private Connect conn;
     private ArrayAdapter itemArrayAdapter;
     private ListView lv_itemlist;
+    private Button addItemButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +46,14 @@ public class HomeFragment extends Fragment {
         conn = new Connect(this.getContext());
 //        View rootView = inflater.inflate(R.layout.fragment_home,container,false);
         lv_itemlist = (ListView) root.findViewById(R.id.lv_items);
+        addItemButton = (Button) root.findViewById(R.id.addItemButton);
+
+        addItemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addItemClicked();
+            }
+        });
         transform();
         return root;
     }
@@ -59,6 +71,12 @@ public class HomeFragment extends Fragment {
 
         itemArrayAdapter = new ArrayAdapter<InventoryModel>(this.getContext(),android.R.layout.simple_list_item_1,modelList);
         lv_itemlist.setAdapter(itemArrayAdapter);
+    }
+
+    public void addItemClicked()
+    {
+        Intent i = new Intent(this.getContext(),AddInventory.class);
+        startActivity(i);
     }
 
     @Override
