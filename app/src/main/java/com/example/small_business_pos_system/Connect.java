@@ -5,12 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 public class Connect extends SQLiteOpenHelper {
@@ -74,6 +76,46 @@ public class Connect extends SQLiteOpenHelper {
         return false;
     }
 
+    public boolean deleteInventory(Item item)
+    {
+        boolean valid = false;
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = "DELETE FROM " + INVENTORY_TABLE + " WHERE IT_ID = " + item.getIt_id();
+
+        Cursor cursor = db.rawQuery(sql, null);
+        if(!cursor.moveToFirst())
+        {
+            valid = true;
+            deleteItem(item);
+        }
+
+
+        return valid;
+    }
+
+
+
+    public void deleteItem(Item item)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = "DELETE FROM " + ITEM_TABLE + " WHERE IT_ID = " + item.getIt_id();
+        Log.e("IT_ID",item.getIt_id() + "");
+        db.execSQL(sql);
+    }
+
+    public Inventory getFirstInstanceInventory(Item item)
+    {
+        Inventory result = null;
+        String sql = "SELECT * FROM " + INVENTORY_TABLE + " WHERE IT_ID = " + item.getIt_id();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql,null);
+        if(cursor.moveToFirst())
+        {
+            result = new Inventory(cursor.getInt(0),item,cursor.getInt(2));
+        }
+        return result;
+    }
+
     public boolean addInventory(Inventory inventory)
     {
         long rowId = addItem(inventory.getItem());
@@ -111,6 +153,22 @@ public class Connect extends SQLiteOpenHelper {
         return true;
     }
 
+    public boolean setAllInventoryField(Inventory inventory)
+    {
+//        String sql = "UPDATE " + INVENTORY_TABLE + " SET QUANTITY = " + quantity + " WHERE IT_ID = " + it_id;
+        editInventoryItem(inventory);
+
+        String sql = "UPDATE " + ITEM_TABLE + " SET NAME = '" + inventory.getItem().getName() + "', PRICE = " + inventory.getItem().getPrice() + " WHERE IT_ID = " + inventory.getItem().getIt_id();
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(sql);
+//        SQLiteDatabase db = this.getWritableDatabase();
+//
+//        db.execSQL(sql);
+
+        return true;
+    }
+
+
     public void editInventoryItem(Inventory inventory) {
 
         String sql = "UPDATE " + INVENTORY_TABLE + " SET QUANTITY = " + inventory.getQuantity() + " WHERE it_id = " + inventory.getItem().getIt_id();
@@ -119,19 +177,98 @@ public class Connect extends SQLiteOpenHelper {
 //        cv.put(COLUMN_QUANTITY, inventory.getQuantity());
 
         db.execSQL(sql);
+    }
 
 
-//        db.update(INVENTORY_TABLE, cv,"WHERE it_id = " + inventory.getItem().getIt_id(), );
-//        long  db.rawQuery(sql,null);
-//        db.R
-//        if(cursor.moveToFirst())
-//        {
-//            cursor.close();
-//            db.close();
-//
-//            return true;
-//        }
-//        return false;
+    public boolean editPrice(int it_id ,float price)
+    {
+        boolean valid = false;
+        if(price < 0)
+        {
+            String sql = "UPDATE " + ITEM_TABLE + " SET PRICE = " + price + " WHERE IT_ID = " + it_id;
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            Cursor cursor = db.rawQuery(sql,null);
+            if(cursor.moveToFirst())
+            {
+                valid = true;
+            }
+            cursor.close();
+            db.close();
+        }
+
+        return valid;
+    }
+
+    public boolean editItemName(int it_id ,String name)
+    {
+        boolean valid = false;
+
+        try{
+            String sql = "UPDATE " + ITEM_TABLE + " SET NAME = " + name + " WHERE IT_ID = " + it_id;
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery(sql,null);
+            if(cursor.moveToFirst())
+            {
+                valid = true;
+            }
+            cursor.close();
+            db.close();
+        }catch(Exception e)
+        {
+        }
+
+        return valid;
+    }
+
+    public boolean editQuantity(int quantity, int in_id)
+    {
+        boolean valid = false;
+
+        try{
+            String sql = "UPDATE " + INVENTORY_TABLE + " SET QUANTITY = " + quantity + " WHERE IN_ID = " + in_id;
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery(sql,null);
+            if(cursor.moveToFirst())
+            {
+                valid = true;
+            }
+            cursor.close();
+            db.close();
+        }catch(Exception e)
+        {
+        }
+
+        return valid;
+    }
+
+    public boolean isItemNameExist(Item item, int orig_it_id, boolean edit)
+    {
+        boolean flag = false;
+        List<Inventory> list = getAllInventory();
+
+        for(Inventory inventory: list)
+        {
+            if(inventory.getItem().getName().equals(item.getName()))
+            {
+                if(edit) {
+                    if(Integer.toString(inventory.getItem().getIt_id()).equals(Integer.toString(item.getIt_id()))) {
+                        if (!Integer.toString(orig_it_id).equals(Integer.toString(item.getIt_id()))) {
+                            flag = true;
+                            break;
+                        }
+                        else {
+                        }
+                    }
+                }
+                else {
+                    flag = true;
+                    break;
+                }
+            }
+        }
+
+        return flag;
     }
 
     public List<Inventory> getAllInventory()
@@ -216,6 +353,31 @@ public class Connect extends SQLiteOpenHelper {
         return result;
     }
 
+    public Item getFirstInstanceItem(String name)
+    {
+        Item result = null;
+        String sql = "SELECT * FROM " + ITEM_TABLE + " WHERE NAME = '" + name + "'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql,null);
+        if(cursor.moveToFirst())
+        {
+            result = new Item(cursor.getInt(0),cursor.getString(1),cursor.getFloat(2));
+        }
+        return result;
+    }
+
+    public Inventory getInventoryByItId(int it_id) {
+        Inventory result = null;
+        String sql = "SELECT * FROM " + INVENTORY_TABLE + " WHERE IT_ID = " + it_id;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql,null);
+        if(cursor.moveToFirst())
+        {
+            result = new Inventory(cursor.getInt(0),getItem(cursor.getInt(1)),cursor.getInt(2));
+        }
+        return result;
+    }
+
     public Item getItemByName(String name)
     {
         Item result = null;
@@ -228,6 +390,7 @@ public class Connect extends SQLiteOpenHelper {
         }
         return result;
     }
+
 
     public void dropInventory()
     {

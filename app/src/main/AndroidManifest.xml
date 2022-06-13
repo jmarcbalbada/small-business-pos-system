@@ -17,6 +17,9 @@
         android:theme="@style/Theme.SmallBusinessPosSystem"
         tools:targetApi="31">
         <activity
+            android:name=".EditInventory"
+            android:exported="false" />
+        <activity
             android:name=".AddTransaction"
             android:exported="false" />
         <activity

@@ -37,6 +37,13 @@ public class AddInventory extends AppCompatActivity {
             fieldItemName.setError("Please enter item name!");
             proceed = false;
         }
+
+        if(conn.isItemNameExist(new Item(fieldItemName.getText().toString().trim()), -1,false))
+        {
+            fieldItemName.setError("This item already exist!");
+            proceed = false;
+        }
+
         if (TextUtils.isEmpty(fieldQuantity.getText().toString().trim())){
             fieldQuantity.setError("Please enter quantity!");
             proceed = false;
