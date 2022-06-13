@@ -3,6 +3,7 @@ package com.example.small_business_pos_system;
 public class Transaction {
     private Item item;
     private int ref_no;
+    private String name;
     private int quantity;
     private float totalPrice;
     private String dateOfPurchase;
@@ -30,6 +31,23 @@ public class Transaction {
         item.setName(name);
         item.setPrice(price);
         this.ref_no = ref_no;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+        this.dateOfPurchase = dateOfPurchase;
+    }
+
+    public Transaction (String name, int quantity, float totalPrice, String dateOfPurchase)
+    {
+        this.name = name;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+        this.dateOfPurchase = dateOfPurchase;
+    }
+
+    public Transaction (int ref_no, String name, int quantity, float totalPrice, String dateOfPurchase)
+    {
+        this.ref_no = ref_no;
+        this.name = name;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
         this.dateOfPurchase = dateOfPurchase;
@@ -85,5 +103,14 @@ public class Transaction {
     public void setDateOfPurchase(String dateOfPurchase)
     {
         this.dateOfPurchase = dateOfPurchase;
+    }
+
+    @Override
+    public String toString() {
+        return "\nReference No: " + ref_no +
+                "\nName: " + name +
+                "\nQuantity: " + quantity +
+                "\nTotal Price: " + totalPrice +
+                "\nDate and Time: " + dateOfPurchase + "\n";
     }
 }

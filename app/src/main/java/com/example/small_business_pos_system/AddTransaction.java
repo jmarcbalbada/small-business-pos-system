@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.small_business_pos_system.ui.gallery.GalleryFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,7 +74,7 @@ public class AddTransaction extends AppCompatActivity {
                                     Inventory inventory = new Inventory(item,model.getQuantity()-Integer.parseInt(m_Quantity));
                                     conn.editInventoryItem(inventory);
                                     Toast.makeText(AddTransaction.this, "Purchase complete!", Toast.LENGTH_SHORT).show();
-                                    Intent i = new Intent(AddTransaction.this,MainActivity.class);
+                                    Intent i = new Intent(AddTransaction.this, GalleryFragment.class);
                                     startActivity(i);
                                 }
                             }
