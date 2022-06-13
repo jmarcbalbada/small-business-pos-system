@@ -36,7 +36,7 @@ public class Connect extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createItemTableStatement = "CREATE TABLE ITEM (IT_ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, PRICE REAL)";
         String createInventoryTableStatement = "CREATE TABLE INVENTORY (IN_ID INTEGER PRIMARY KEY AUTOINCREMENT, IT_ID INTEGER, QUANTITY INTEGER, FOREIGN KEY(IT_ID) REFERENCES ITEM(IT_ID))";
-        String createTransactionTableStatement = "CREATE TABLE TRANSACTIONS (REF_NO INTEGER PRIMARY KEY AUTOINCREMENT, IT_ID INTEGER, QUANTITY INTEGER, TOTAL_PRICE REAL, DATE TEXT, FOREIGN KEY(IT_ID) REFERENCES ITEM(IT_ID))";
+        String createTransactionTableStatement = "CREATE TABLE TRANSACTIONS (REF_NO INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, QUANTITY INTEGER, TOTAL_PRICE REAL, DATE TEXT)";
         db.execSQL(createItemTableStatement);
         db.execSQL(createInventoryTableStatement);
         db.execSQL(createTransactionTableStatement);
@@ -137,9 +137,9 @@ public class Connect extends SQLiteOpenHelper {
     public boolean addTransaction(Transaction transaction) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        int it_id = transaction.getItem().getIt_id();
+        String name = transaction.getItem().getName();
 
-        cv.put(COLUMN_IT_ID,it_id);
+        cv.put(COLUMN_NAME,name);
         cv.put(COLUMN_QUANTITY,transaction.getQuantity());
         cv.put(COLUMN_TOTAL_PRICE,transaction.getTotalPrice());
         cv.put(COLUMN_DATEOFPURCHASE,new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
@@ -240,6 +240,62 @@ public class Connect extends SQLiteOpenHelper {
         }
 
         return valid;
+    }
+
+    public List<Transaction> searchTransaction(String search, String category)
+    {
+        List<Transaction> result = new ArrayList<>();
+        String sql = "";
+        switch(category)
+        {
+            case "Product": sql = "SELECT * FROM " + TRANSACTION_TABLE + " WHERE NAME = '" + search + "' COLLATE NOCASE";
+                break;
+            case "Ref_No": sql = "SELECT * FROM " + TRANSACTION_TABLE + " WHERE REF_NO = " + Integer.parseInt(search);
+                break;
+            case "Date":
+                sql = "SELECT * FROM " + TRANSACTION_TABLE + " WHERE DATE LIKE '" + search + "%'";
+                break;
+        }
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(sql,null);
+        if(cursor.moveToFirst())
+        {
+            do {
+                Transaction transaction = new Transaction(cursor.getInt(0),cursor.getString(1),
+                        cursor.getInt(2),cursor.getFloat(3),
+                        cursor.getString(4));
+
+                result.add(transaction);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return result;
+    }
+
+    public List<Transaction> firstFiveInTransaction()
+    {
+        List<Transaction> result = new ArrayList<>();
+        String sql = "SELECT * FROM " + TRANSACTION_TABLE + " ORDER BY DATE DESC LIMIT 5";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(sql,null);
+        if(cursor.moveToFirst())
+        {
+            do {
+                Transaction transaction = new Transaction(cursor.getInt(0),cursor.getString(1),
+                        cursor.getInt(2),cursor.getFloat(3),
+                        cursor.getString(4));
+
+                result.add(transaction);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return result;
     }
 
     public boolean isItemNameExist(Item item, int orig_it_id, boolean edit)
