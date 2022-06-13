@@ -8,7 +8,7 @@
 
     <ListView
         android:id="@+id/add_transaction_lvItems"
-        android:layout_width="405dp"
+        android:layout_width="390dp"
         android:layout_height="542dp"
         android:layout_marginTop="164dp"
         android:gravity="center"
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="116dp"
-        android:text="Select an item"
+        android:text="Select an item:"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.084"

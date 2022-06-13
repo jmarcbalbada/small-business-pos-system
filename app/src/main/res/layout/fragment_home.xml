@@ -24,27 +24,27 @@
 
     <ListView
         android:id="@+id/lv_items"
-        android:layout_width="399dp"
-        android:layout_height="596dp"
+        android:layout_width="match_parent"
+        android:layout_height="567dp"
         android:gravity="center"
         android:numColumns="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.725" />
+        app:layout_constraintTop_toBottomOf="@+id/addItemButton"
+        app:layout_constraintVertical_bias="0.37" />
 
     <Button
         android:id="@+id/addItemButton"
-        android:layout_width="110dp"
-        android:layout_height="44dp"
+        android:layout_width="116dp"
+        android:layout_height="54dp"
         android:onClick="addItemClicked"
         android:text="Add Item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.946"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.078" />
+        app:layout_constraintVertical_bias="0.062" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
