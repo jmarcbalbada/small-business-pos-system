@@ -14,6 +14,11 @@ public class Inventory {
         this.quantity = quantity;
     }
 
+    public Inventory(int quantity)
+    {
+        this.quantity = quantity;
+    }
+
     public Inventory(Item item, int quantity)
     {
         this.item = item;

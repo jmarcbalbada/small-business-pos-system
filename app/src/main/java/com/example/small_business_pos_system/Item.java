@@ -5,7 +5,10 @@ public class Item {
     private String name;
     private float price;
 
-    Item(){};
+    Item(){
+        name = "";
+        price = 0;
+    };
 
     Item(int it_id,String name, float price)
     {

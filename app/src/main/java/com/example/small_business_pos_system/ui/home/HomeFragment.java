@@ -86,7 +86,8 @@ public class HomeFragment extends Fragment {
 //                editNameInput.setText(model.getName());
 //                editPriceInput.setText(Float .toString(model.getPrice()));
 //                editQuantityInput.setText(Integer.toString(model.getQuantity()));
-                Toast.makeText(context, model.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Selected: " + model.getName(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, model.toString(), Toast.LENGTH_SHORT).show();
 //                showAlertDialog(R.layout.edit_dialog_layout);
                 Intent i = new Intent(context, EditInventory.class);
                 startActivity(i);
