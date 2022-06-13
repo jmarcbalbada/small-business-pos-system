@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -48,6 +49,7 @@ public class AddTransaction extends AppCompatActivity {
 
                 // Set up the input
                 EditText input = new EditText(AddTransaction.this);
+                input.setGravity(Gravity.CENTER);
                 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 builder.setView(input);
@@ -74,7 +76,7 @@ public class AddTransaction extends AppCompatActivity {
                                     Inventory inventory = new Inventory(item,model.getQuantity()-Integer.parseInt(m_Quantity));
                                     conn.editInventoryItem(inventory);
                                     Toast.makeText(AddTransaction.this, "Purchase complete!", Toast.LENGTH_SHORT).show();
-                                    Intent i = new Intent(AddTransaction.this, GalleryFragment.class);
+                                    Intent i = new Intent(AddTransaction.this, MainActivity.class);
                                     startActivity(i);
                                 }
                             }

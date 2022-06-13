@@ -23,7 +23,7 @@
 
     <ListView
         android:id="@+id/lv_transaction"
-        android:layout_width="409dp"
+        android:layout_width="390dp"
         android:layout_height="500dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
